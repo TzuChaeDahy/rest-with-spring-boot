@@ -32,6 +32,17 @@ public class MathController {
         return convertToDouble(numberOne) - convertToDouble(numberTwo);
     }
 
+    @RequestMapping(value = "/multiply/{numberOne}/{numberTwo}")
+    public double multiply(
+            @PathVariable(value = "numberOne") String numberOne,
+            @PathVariable(value = "numberTwo") String numberTwo
+    ) throws Exception {
+        if (!isNumeric(numberOne) || !isNumeric(numberTwo)) {
+            throw new UnsupportedMathOperationException("please, set a numeric value.");
+        }
+
+        return convertToDouble(numberOne) * convertToDouble(numberTwo);
+    }
 
     private boolean isNumeric(String strNumber) {
         if (strNumber == null) {
