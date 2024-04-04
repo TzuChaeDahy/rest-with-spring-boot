@@ -1,14 +1,19 @@
 package br.com.tzuchaedahy.restwithspringboot.math;
 
 import br.com.tzuchaedahy.restwithspringboot.math.exceptions.UnsupportedMathOperationException;
+import org.springframework.http.HttpMethod;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController()
 @RequestMapping(value = "/math")
 public class MathController {
-    @RequestMapping(value = "/sum/{numberOne}/{numberTwo}")
+    @RequestMapping(
+            value = "/sum/{numberOne}/{numberTwo}",
+            method = RequestMethod.GET
+    )
     public double sum(
             @PathVariable(value = "numberOne") String numberOne,
             @PathVariable(value = "numberTwo") String numberTwo
@@ -20,7 +25,10 @@ public class MathController {
         return convertToDouble(numberOne) + convertToDouble(numberTwo);
     }
 
-    @RequestMapping(value = "/subtract/{numberOne}/{numberTwo}")
+    @RequestMapping(
+            value = "/subtract/{numberOne}/{numberTwo}",
+            method = RequestMethod.GET
+    )
     public double subtract(
             @PathVariable(value = "numberOne") String numberOne,
             @PathVariable(value = "numberTwo") String numberTwo
@@ -32,7 +40,10 @@ public class MathController {
         return convertToDouble(numberOne) - convertToDouble(numberTwo);
     }
 
-    @RequestMapping(value = "/multiply/{numberOne}/{numberTwo}")
+    @RequestMapping(
+            value = "/multiply/{numberOne}/{numberTwo}",
+            method = RequestMethod.GET
+    )
     public double multiply(
             @PathVariable(value = "numberOne") String numberOne,
             @PathVariable(value = "numberTwo") String numberTwo
@@ -44,7 +55,10 @@ public class MathController {
         return convertToDouble(numberOne) * convertToDouble(numberTwo);
     }
 
-    @RequestMapping(value = "/divide/{numerator}/{denominator}")
+    @RequestMapping(
+            value = "/divide/{numerator}/{denominator}",
+            method = RequestMethod.GET
+    )
     public double divide(
             @PathVariable(value = "numerator") String numerator,
             @PathVariable(value = "denominator") String denominator
@@ -60,7 +74,10 @@ public class MathController {
         return convertToDouble(numerator) / convertToDouble(denominator);
     }
 
-    @RequestMapping(value = "/media/{numberOne}/{numberTwo}")
+    @RequestMapping(
+            value = "/media/{numberOne}/{numberTwo}",
+            method = RequestMethod.GET
+    )
     public double media(
             @PathVariable(value = "numberOne") String numberOne,
             @PathVariable(value = "numberTwo") String numberTwo
@@ -72,7 +89,10 @@ public class MathController {
         return (convertToDouble(numberOne) + convertToDouble(numberTwo))/2;
     }
 
-    @RequestMapping(value = "/root/{index}/{number}")
+    @RequestMapping(
+            value = "/root/{index}/{number}",
+            method = RequestMethod.GET
+    )
     public double root(
             @PathVariable(value = "index") String index,
             @PathVariable(value = "number") String number
