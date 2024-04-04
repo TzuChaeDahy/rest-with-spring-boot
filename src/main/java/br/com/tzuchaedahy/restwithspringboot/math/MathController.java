@@ -72,6 +72,22 @@ public class MathController {
         return (convertToDouble(numberOne) + convertToDouble(numberTwo))/2;
     }
 
+    @RequestMapping(value = "/root/{index}/{number}")
+    public double root(
+            @PathVariable(value = "index") String index,
+            @PathVariable(value = "number") String number
+    ) throws Exception {
+        if (!isNumeric(index) || !isNumeric(number)) {
+            throw new UnsupportedMathOperationException("please, set a numeric value.");
+        }
+
+        if (index.equals("0") || index.equals("0.0")) {
+            throw new UnsupportedMathOperationException("please, set a not zero index");
+        }
+
+        return Math.pow(convertToDouble(number), 1.0/convertToDouble(index));
+    }
+
     private boolean isNumeric(String strNumber) {
         if (strNumber == null) {
             return false;
