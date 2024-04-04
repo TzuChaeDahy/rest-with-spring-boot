@@ -1,4 +1,4 @@
-package br.com.tzuchaedahy.restwithspringboot;
+package br.com.tzuchaedahy.restwithspringboot.greeting;
 
 public class Greeting {
     private final Long id;
