@@ -60,6 +60,18 @@ public class MathController {
         return convertToDouble(numerator) / convertToDouble(denominator);
     }
 
+    @RequestMapping(value = "/media/{numberOne}/{numberTwo}")
+    public double media(
+            @PathVariable(value = "numberOne") String numberOne,
+            @PathVariable(value = "numberTwo") String numberTwo
+    ) throws Exception {
+        if (!isNumeric(numberOne) || !isNumeric(numberTwo)) {
+            throw new UnsupportedMathOperationException("please, set a numeric value.");
+        }
+
+        return (convertToDouble(numberOne) + convertToDouble(numberTwo))/2;
+    }
+
     private boolean isNumeric(String strNumber) {
         if (strNumber == null) {
             return false;
