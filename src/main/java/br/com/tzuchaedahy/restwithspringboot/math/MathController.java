@@ -44,6 +44,22 @@ public class MathController {
         return convertToDouble(numberOne) * convertToDouble(numberTwo);
     }
 
+    @RequestMapping(value = "/divide/{numerator}/{denominator}")
+    public double divide(
+            @PathVariable(value = "numerator") String numerator,
+            @PathVariable(value = "denominator") String denominator
+    ) throws Exception {
+        if (!isNumeric(numerator) || !isNumeric(denominator)) {
+            throw new UnsupportedMathOperationException("please, set a numeric value.");
+        }
+
+        if (denominator.equals("0") || denominator.equals("0.0")) {
+            throw new UnsupportedMathOperationException("please, set a not zero value!");
+        }
+
+        return convertToDouble(numerator) / convertToDouble(denominator);
+    }
+
     private boolean isNumeric(String strNumber) {
         if (strNumber == null) {
             return false;
