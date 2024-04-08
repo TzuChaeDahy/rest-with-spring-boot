@@ -1,4 +1,4 @@
-package br.com.tzuchaedahy.restwithspringboot.math.exceptions;
+package br.com.tzuchaedahy.restwithspringboot.exceptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

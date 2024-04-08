@@ -1,7 +1,7 @@
 package br.com.tzuchaedahy.restwithspringboot.math;
 
 import br.com.tzuchaedahy.restwithspringboot.math.converter.MathConverter;
-import br.com.tzuchaedahy.restwithspringboot.math.exceptions.UnsupportedMathOperationException;
+import br.com.tzuchaedahy.restwithspringboot.exceptions.UnsupportedMathOperationException;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;

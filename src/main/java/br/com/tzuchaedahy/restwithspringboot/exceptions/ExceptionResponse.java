@@ -1,4 +1,4 @@
-package br.com.tzuchaedahy.restwithspringboot.math.exceptions;
+package br.com.tzuchaedahy.restwithspringboot.exceptions;
 
 import java.io.Serializable;
 import java.util.Date;
