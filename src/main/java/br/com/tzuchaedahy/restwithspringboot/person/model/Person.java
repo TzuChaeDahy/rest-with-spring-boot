@@ -1,12 +1,19 @@
 package br.com.tzuchaedahy.restwithspringboot.person.model;
 
-import java.util.concurrent.atomic.AtomicLong;
+import jakarta.persistence.*;
 
+@Entity
+@Table(name = "person")
 public class Person {
-    private long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @Column(name = "first_name", nullable = false)
     private String firstName;
+    @Column(name = "last_name", nullable = false)
     private String lastName;
-    private int Age;
+    @Column(name = "age", nullable = false)
+    private Integer age;
 
     public Person() {
     }
@@ -15,7 +22,7 @@ public class Person {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -35,11 +42,11 @@ public class Person {
         this.lastName = lastName;
     }
 
-    public int getAge() {
-        return Age;
+    public Integer getAge() {
+        return age;
     }
 
-    public void setAge(int age) {
-        Age = age;
+    public void setAge(Integer age) {
+        this.age = age;
     }
 }
