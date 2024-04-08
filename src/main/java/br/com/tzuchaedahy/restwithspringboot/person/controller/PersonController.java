@@ -3,7 +3,10 @@ package br.com.tzuchaedahy.restwithspringboot.person.controller;
 import br.com.tzuchaedahy.restwithspringboot.person.model.Person;
 import br.com.tzuchaedahy.restwithspringboot.person.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,49 +18,52 @@ public class PersonController {
     @Autowired
     private PersonService personService;
 
-    @RequestMapping(
+    @GetMapping(
             value = "/{id}",
-            method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public Person findByID(@PathVariable(value = "id") long id) {
-        return personService.findByID(id);
+    public ResponseEntity<Person> findByID(@PathVariable(value = "id") long id) {
+        Person person = personService.findByID(id);
+
+        return new ResponseEntity<>(person, HttpStatus.OK);
     }
 
-    @RequestMapping(
+    @GetMapping(
             value = "/all",
-            method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public List<Person> findAll() {
-        return personService.findAll();
+    public ResponseEntity<List<Person>> findAll() {
+        List<Person> people = personService.findAll();
+
+        return new ResponseEntity<>(people, HttpStatus.OK);
     }
 
-    @RequestMapping(
+    @PostMapping(
             value = "/create",
-            method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public Person create(@RequestBody Person person) {
-        return personService.create(person);
+    public ResponseEntity<Long> create(@RequestBody @Validated Person person) {
+        Long id = personService.create(person);
+
+        return new ResponseEntity<>(id, HttpStatus.CREATED);
     }
 
-    @RequestMapping(
+    @PutMapping(
             value = "/update",
-            method = RequestMethod.PUT,
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public long update(@RequestBody Person person) {
-        return personService.update(person);
+    public ResponseEntity<Long> update(@RequestBody Person person) {
+        Long id =  personService.update(person);
+
+        return new ResponseEntity<>(id, HttpStatus.OK);
     }
 
-    @RequestMapping(
-            value = "/delete/{id}",
-            method = RequestMethod.DELETE
-    )
-    public void delete(@PathVariable long id) {
+    @DeleteMapping(value = "/delete/{id}")
+    public ResponseEntity<?> delete(@PathVariable long id) {
         personService.delete(id);
+
+        return ResponseEntity.noContent().build();
     }
 }
