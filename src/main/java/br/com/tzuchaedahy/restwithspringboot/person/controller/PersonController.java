@@ -2,9 +2,9 @@ package br.com.tzuchaedahy.restwithspringboot.person.controller;
 
 import br.com.tzuchaedahy.restwithspringboot.person.model.Person;
 import br.com.tzuchaedahy.restwithspringboot.person.service.PersonService;
+import br.com.tzuchaedahy.restwithspringboot.util.MediaType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +20,7 @@ public class PersonController {
 
     @GetMapping(
             value = "/{id}",
-            produces = MediaType.APPLICATION_JSON_VALUE
+            produces = {MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YAML}
     )
     public ResponseEntity<Person> findByID(@PathVariable(value = "id") long id) {
         Person person = personService.findByID(id);
@@ -30,7 +30,7 @@ public class PersonController {
 
     @GetMapping(
             value = "/all",
-            produces = MediaType.APPLICATION_JSON_VALUE
+            produces = {MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YAML}
     )
     public ResponseEntity<List<Person>> findAll() {
         List<Person> people = personService.findAll();
@@ -40,8 +40,8 @@ public class PersonController {
 
     @PostMapping(
             value = "/create",
-            consumes = MediaType.APPLICATION_JSON_VALUE,
-            produces = MediaType.APPLICATION_JSON_VALUE
+            consumes = {MediaType.APPLICATION_JSON},
+            produces = {MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YAML}
     )
     public ResponseEntity<Long> create(@RequestBody @Validated Person person) {
         Long id = personService.create(person);
@@ -51,8 +51,8 @@ public class PersonController {
 
     @PutMapping(
             value = "/update",
-            consumes = MediaType.APPLICATION_JSON_VALUE,
-            produces = MediaType.APPLICATION_JSON_VALUE
+            consumes = {MediaType.APPLICATION_JSON},
+            produces = {MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YAML}
     )
     public ResponseEntity<Long> update(@RequestBody Person person) {
         Long id =  personService.update(person);
