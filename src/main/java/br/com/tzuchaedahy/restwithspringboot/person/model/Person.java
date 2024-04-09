@@ -1,5 +1,6 @@
 package br.com.tzuchaedahy.restwithspringboot.person.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
 @Entity
@@ -9,9 +10,13 @@ public class Person {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name = "first_name", nullable = false)
+    @JsonProperty("first_name")
     private String firstName;
+
     @Column(name = "last_name", nullable = false)
+    @JsonProperty("last_name")
     private String lastName;
+
     @Column(name = "age", nullable = false)
     private Integer age;
 
