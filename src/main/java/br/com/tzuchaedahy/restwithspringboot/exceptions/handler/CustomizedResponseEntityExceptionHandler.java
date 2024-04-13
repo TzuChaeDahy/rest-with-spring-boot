@@ -1,6 +1,7 @@
 package br.com.tzuchaedahy.restwithspringboot.exceptions.handler;
 
 import br.com.tzuchaedahy.restwithspringboot.exceptions.ExceptionResponse;
+import br.com.tzuchaedahy.restwithspringboot.exceptions.InternalServerErrorException;
 import br.com.tzuchaedahy.restwithspringboot.exceptions.ResourceNotFoundException;
 import br.com.tzuchaedahy.restwithspringboot.exceptions.UnsupportedMathOperationException;
 import org.springframework.http.HttpStatus;
@@ -48,6 +49,17 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
         );
 
         return new ResponseEntity<>(exceptionResponse, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(InternalServerErrorException.class)
+    public final ResponseEntity<ExceptionResponse> handleInternalServerErrorExceptions(Exception ex, WebRequest request) {
+        ExceptionResponse exceptionResponse = new ExceptionResponse(
+                new Date(),
+                ex.getMessage(),
+                request.getDescription(false)
+        );
+
+        return new ResponseEntity<>(exceptionResponse, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }
 
