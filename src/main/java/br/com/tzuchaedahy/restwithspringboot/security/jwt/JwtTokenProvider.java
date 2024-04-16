@@ -58,6 +58,18 @@ public class JwtTokenProvider {
         );
     }
 
+    public TokenDTO refreshToken(String refreshToken) {
+        if (refreshToken.contains("Bearer ")) {
+            refreshToken = refreshToken.substring("Bearer ".length());
+        }
+
+        DecodedJWT decodedJWT = decodeJWT(refreshToken);
+        String userName = decodedJWT.getSubject();
+        List<String> roles = decodedJWT.getClaim("roles").asList(String.class);
+
+        return createTokenDTO(userName, roles);
+    }
+
     private String getRefreshToken(String userName, List<String> roles, Date now) {
         Date newExpireDate = new Date(now.getTime() + (expireLength * 3));
 

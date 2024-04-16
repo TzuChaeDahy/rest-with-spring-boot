@@ -47,4 +47,15 @@ public class AuthService {
             throw new BadCredentialsException("invalid username or password");
         }
     }
+
+    public ResponseEntity refreshToken(String refreshToken, String userName) {
+        User user = userRepository.findByUsername(userName);
+
+        if (user == null) {
+            throw new UsernameNotFoundException("username " + userName + " not found");
+        }
+
+        TokenDTO token = jwtTokenProvider.refreshToken(refreshToken);
+        return ResponseEntity.ok(token);
+    }
 }
