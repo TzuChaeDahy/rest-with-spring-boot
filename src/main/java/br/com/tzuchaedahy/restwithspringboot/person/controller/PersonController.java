@@ -20,7 +20,6 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/api/v1/person")
 @Tag(
-
         name = "Person",
         description = "Endpoints to manage people"
 )
