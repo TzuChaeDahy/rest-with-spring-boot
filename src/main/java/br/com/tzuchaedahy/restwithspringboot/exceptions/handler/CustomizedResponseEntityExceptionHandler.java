@@ -1,9 +1,6 @@
 package br.com.tzuchaedahy.restwithspringboot.exceptions.handler;
 
-import br.com.tzuchaedahy.restwithspringboot.exceptions.ExceptionResponse;
-import br.com.tzuchaedahy.restwithspringboot.exceptions.InternalServerErrorException;
-import br.com.tzuchaedahy.restwithspringboot.exceptions.ResourceNotFoundException;
-import br.com.tzuchaedahy.restwithspringboot.exceptions.UnsupportedMathOperationException;
+import br.com.tzuchaedahy.restwithspringboot.exceptions.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -17,17 +14,6 @@ import java.util.Date;
 @ControllerAdvice
 @RestController
 public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExceptionHandler {
-
-    @ExceptionHandler(Exception.class)
-    public final ResponseEntity<ExceptionResponse> handleAllExceptions(Exception ex, WebRequest request) {
-    ExceptionResponse exceptionResponse = new ExceptionResponse(
-            new Date(),
-            ex.getMessage(),
-            request.getDescription(false)
-    );
-
-    return new ResponseEntity<>(exceptionResponse, HttpStatus.INTERNAL_SERVER_ERROR);
-    }
 
     @ExceptionHandler(UnsupportedMathOperationException.class)
     public final ResponseEntity<ExceptionResponse> handleBadRequestExceptions(Exception ex, WebRequest request) {
@@ -60,6 +46,17 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
         );
 
         return new ResponseEntity<>(exceptionResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @ExceptionHandler(InvalidJwtAuthenticationException.class)
+    public final ResponseEntity<ExceptionResponse> handleForbiddenErrorExceptions(Exception ex, WebRequest request) {
+        ExceptionResponse exceptionResponse = new ExceptionResponse(
+                new Date(),
+                ex.getMessage(),
+                request.getDescription(false)
+        );
+
+        return new ResponseEntity<>(exceptionResponse, HttpStatus.FORBIDDEN);
     }
 }
 
